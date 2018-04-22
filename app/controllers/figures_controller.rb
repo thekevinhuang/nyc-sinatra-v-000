@@ -89,9 +89,9 @@ class FiguresController < ApplicationController
     #end
 
     #binding.pry
-    if !fig_lands.empty?
-      @fig.landmarks = fig_lands
-    end
+    #if !fig_lands.empty?
+    #  @fig.landmarks = fig_lands
+    #end
     @fig.save
     redirect "/figures/#{params[:id]}"
   end
