@@ -61,32 +61,32 @@ class FiguresController < ApplicationController
 
   patch '/figures/:id' do
     @fig = Figure.find_by(params[:id])
-    @fig.update(name: params["figure"]["name"])
+    @fig.update(params["figure"])
     #binding.pry
     if !params["title"]["name"].empty?
       @fig.titles << Title.find_or_create_by(name: params["title"]["name"])
     end
 
-    if params["figure"]["title_ids"]
-      if !params["figure"]["title_ids"].empty?
-        params["figure"]["title_ids"].each do |title|
-          @fig.titles << Title.find_by(title)
-        end
-      end
-    end
+    #if params["figure"]["title_ids"]
+    #  if !params["figure"]["title_ids"].empty?
+    #    params["figure"]["title_ids"].each do |title|
+    #      @fig.titles << Title.find_by(title)
+    #    end
+    #  end
+    #end
 
-    fig_lands = []
+    #fig_lands = []
     if !params["landmark"]["name"].empty?
-      fig_lands << Landmark.find_or_create_by(name: params["landmark"]["name"])
+      @fig.landmarks << Landmark.find_or_create_by(name: params["landmark"]["name"])
     end
 
-    if params["figure"]["landmark_ids"]
-      if !params["figure"]["landmark_ids"].empty?
-        params["figure"]["landmark_ids"].each do |land|
-          fig_lands << Landmark.find_by(land)
-        end
-      end
-    end
+    #if params["figure"]["landmark_ids"]
+    #  if !params["figure"]["landmark_ids"].empty?
+    #    params["figure"]["landmark_ids"].each do |land|
+    #      fig_lands << Landmark.find_by(land)
+    #    end
+    #  end
+    #end
 
     #binding.pry
     if !fig_lands.empty?
